@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
 from common.models import Transaction
-
+import json
 #to integrate with .html frontend, define html template (it's should be a string) first
 html_template = '''
 <!DOCTYPE html>
@@ -49,6 +49,17 @@ django_engine = engines['django']
 template = django_engine.from_string(html_template)
 
 # return true data from database
+
+def dispatcher(request):
+    if request.method =="GET":
+        request.params = request.GET
+    else:
+        request.params = json.loads(request.body)
+    action = request.params['action']
+    if action == 'list_transaction':
+        return listtranaction(request)
+    else:
+        return JsonResponse({'ret': 1, 'msg': 'http request not supported'})
 
 def listtransactions(request):
     qs = Transaction.objects.values()
