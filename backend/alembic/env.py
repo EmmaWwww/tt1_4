@@ -15,7 +15,7 @@ config.set_main_option(
     f"postgresql://{settings.db_username}:{settings.db_password}@{settings.db_hostname}:{settings.db_port}/{settings.db_name}",
 )
 
-# Interpret the config file for Python logging.
+# Interpret the djangosys file for Python logging.
 # This line sets up loggers basically.
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
@@ -26,9 +26,9 @@ if config.config_file_name is not None:
 # target_metadata = mymodel.Base.metadata
 target_metadata = Base.metadata
 
-# other values from the config, defined by the needs of env.py,
+# other values from the djangosys, defined by the needs of env.py,
 # can be acquired:
-# my_important_option = config.get_main_option("my_important_option")
+# my_important_option = djangosys.get_main_option("my_important_option")
 # ... etc.
 
 
